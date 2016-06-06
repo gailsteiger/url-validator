@@ -9,19 +9,20 @@ exports.parse = function(url) {
 
     var retval = null;
 
-    if(regex.test(url)) {
-        retval = getObj(url);
+    var matches = url.match(regex);
+    if(matches) {
+        retval = getObj(matches);
     }
 
     return retval;
 }
 
-function getObj(url) {
+function getObj(matches) {
     return {
-        url: url,
-        host: 'tikalk.com',
-        port: 8080,
-        file: 'about.html',
-        path: 'public'
+        url: matches[0],
+        host: matches[3],
+        port: matches[6] || '',
+        file: matches[7],
+        path: ''
     };
 }
